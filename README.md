@@ -14,16 +14,22 @@ laravel9 vite 環境構築
 
 1. git clone https://github.com/engineer-mogura/l9vitedev.git
 2. cd l9vitedev
-3. docker compose up -d
-4. docker compose exec l9vitedev-app bash
+3. docker compose -f docker-compose-first.yml up -d
+4. docker compose -f docker-compose-first.yml exec l9vitedev-app bash
 5. composer create-project "laravel/laravel=9.*" l9vitedev_tmp --prefer-dist
+8. rm l9vitedev_tmp/README.md l9vitedev_tmp/vite.config.js -rf
 6. mv l9vitedev_tmp/* ./
 7. mv l9vitedev_tmp/.* ./
 8. rm l9vitedev_tmp -rf
-9. chmod -R guo+w storage
-10. php artisan storage:link
-11. npm install
-12. composer install
-13. npm run dev
-14. [vite 起動確認](http://localhost:5173)
-15. [laravel 起動確認](http://localhost)
+9. mkdir ./docker/nginx/logs
+10. exit
+11. docker compose -f docker-compose-second.yml down
+12. docker compose -f docker-compose-second.yml up -d
+13. docker compose -f docker-compose-second.yml exec l9vitedev-app bash
+14. npm install
+15. composer install
+16. npm run dev
+17. chmod -R guo+w storage
+18. php artisan storage:link
+19. [vite 起動確認](http://localhost:5173)
+20. [laravel 起動確認](http://localhost)
